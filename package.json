@@ -1,0 +1,29 @@
+{
+  "name": "jsframework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs": "jsdoc -c ./conf.json -r",
+    "watch": "sass --watch src/scss:dist/css & live-server",
+    "build": "sass src/scss:dist/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnordboj/JS-Framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pnordboj/JS-Framework/issues"
+  },
+  "homepage": "https://github.com/pnordboj/JS-Framework#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.11",
+    "live-server": "^1.2.2",
+    "sass": "^1.55.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.0"
+  }
+}

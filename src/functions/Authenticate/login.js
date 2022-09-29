@@ -20,18 +20,17 @@ async function login() {
         const response = await fetch(urlLogin, optionsLogin);
         const data = await response.json();
         console.log(data)
+        localStorage.setItem("access-token", data.accessToken);
+        console.log(localStorage.getItem("access-token"));
         htmlLoggedIn.innerHTML = `
         <div class="shadow p-2 mb-2 bg-body rounded" style="width: rem10;">
             Welcome! ${data.name}
         </div>
         `;
-        htmlProfile.innerHTML = `
-            Create Post
-            View Content Feed
-        `;
+        getAllPosts();
     } catch(error) {
         console.log(error);
-        htmlLogin.innerHTML = displayError('Error', error);
+        htmlLoggedIn.innerHTML = displayError('Error', error);
     }
 }
 

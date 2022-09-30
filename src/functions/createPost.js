@@ -27,7 +27,6 @@ async function createPost(dataform) {
         fetch(url, options)
         .then((response) => response.json())
         .then((json) => console.log(json));
-
     } catch (error) {
         console.log(error);
     }
@@ -45,4 +44,5 @@ const createPostButton = document.querySelector("#createPostButton");
 
 createPostButton.onclick = function() {
     createPost()
+    setTimeout(function(){ window.location.href = "/"; }, 1000);
 };

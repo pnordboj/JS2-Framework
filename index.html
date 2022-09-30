@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row">
-            <a class="navbar-brand shadow rounded p-2 mb-sm-2">Social Media Platform</a>
+            <a href="/" class="navbar-brand shadow rounded p-2 mb-sm-2">Social Media Platform</a>
             <form class="form-inline d-flex">
                 <button class="btn btn-outline-light my-2 my-sm-0 m-2" type="submit">Search</button>
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" >
@@ -33,7 +33,7 @@
         </ul>
         
         <div class="m-auto mt-4 row row-cols-md-2" id="all-posts" style="width: 70%;">
-            
+            <h2 class="m-auto text-center">Please login to view posts!</h2>
         </div>
 
         <div class="container mt-4 m-auto" id="create-post" style="display: none;">
@@ -57,12 +57,6 @@
     <footer>
 
     </footer>
-    <script src="src/functions/Authenticate/register.js"></script>
-    <script src="src/functions/Authenticate/login.js"></script>
-    <script src="src/functions/posts.js"></script>
-    <script src="src/functions/tab.js"></script>
-    <script src="src/functions/createPost.js"></script>
-    <script src="src/functions/search.js"></script>
-    <script src="src/functions/error/error.js"></script>
+    <script type="module" src="src/home.js"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ export async function getAllPosts() {
         console.log(data);
         htmlAll.innerHTML = ``;
         for(let i = 0; i < data.length; i++) {
-            htmlAll.innerHTML +=
+            htmlAll.innerHTML =
                 `
                 <div class="col mt-2">
                     <div class="card">

@@ -3,9 +3,18 @@
 const htmlViewFeed = document.getElementById('view-feed-tab');
 const htmlCreatePost = document.querySelector("#create-post-tab");
 const htmlSearchPost = document.querySelector("#search-post-tab");
+const htmlloginForm = document.querySelector("#loginForm");
 
 const createPost = document.getElementById("create-post");
 const viewFeed = document.getElementById("all-posts");
+
+function isLoggedIn() {
+    return Boolean(localStorage.getItem('access-token'));
+}
+
+if (isLoggedIn() === true) {
+    htmlloginForm.style.display = "none";
+}
 
 htmlViewFeed.onclick = function() {
     if (htmlViewFeed.classList.contains("active")) {
@@ -17,8 +26,6 @@ htmlViewFeed.onclick = function() {
         createPost.style.display = "none";
         if (htmlCreatePost.classList.contains("active")) {
             htmlCreatePost.classList.remove("active")
-        } else if (htmlSearchPost.classList.contains("active")) {
-            htmlSearchPost.classList.remove("active")
         }
     }
 }
@@ -32,21 +39,6 @@ htmlCreatePost.onclick = function() {
         createPost.style.display = "block";
         viewFeed.style.display = "none";
         if (htmlViewFeed.classList.contains("active")) {
-            htmlViewFeed.classList.remove("active")
-        } else if (htmlSearchPost.classList.contains("active")) {
-            htmlSearchPost.classList.remove("active")
-        }
-    }
-}
-
-htmlSearchPost.onclick = function() {
-    if (htmlSearchPost.classList.contains("active")) {
-        return
-    } else {
-        htmlSearchPost.classList.add("active")
-        if (htmlCreatePost.classList.contains("active")) {
-            htmlCreatePost.classList.remove("active")
-        } else if (htmlViewFeed.classList.contains("active")) {
             htmlViewFeed.classList.remove("active")
         }
     }

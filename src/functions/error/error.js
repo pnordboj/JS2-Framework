@@ -1,4 +1,4 @@
-function displayError(message) {
+export function displayError(message) {
     if(!message) {
         message = "Unknown error has occured"
     }

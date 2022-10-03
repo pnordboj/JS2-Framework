@@ -13,15 +13,12 @@
     <header>
         <nav class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row">
             <a href="/" class="navbar-brand shadow rounded p-2 mb-sm-2">Social Media Platform</a>
-            <form class="form-inline d-flex">
-                <button class="btn btn-outline-light my-2 my-sm-0 m-2" type="submit">Search</button>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" >
-            </form>
-            <div id="loggedInUser" class="d-flex justify-content-end">
-                <button class="btn btn-primary border-dark shadow rounded">
-                    Login!
-                </button>
-                  
+            <div class="d-flex">    
+                <div id="loggedInUser" class="d-flex justify-content-end">
+                    <div class="shadow p-2 bg-body rounded" style="width: rem10;">
+                        Not Logged inn, please login!
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -29,11 +26,48 @@
         <ul class="btn-group d-flex container mt-4" id="tab" style="width: 50%;">
             <button class="btn btn-primary active" id="view-feed-tab">View Feed</button>
             <button class="btn btn-primary" id="create-post-tab">Create Post</button>
-            <button class="btn btn-primary" id="search-post-tab">Search Post</button>
         </ul>
-        
+        <form class="container d-flex" style="width: 40%;">
+            <button class="btn btn-primary me-2" type="submit">Clear</button>
+            <input id="searchButton" class="form-control mr-sm-2" type="search" placeholder="Search for a post by id or text" aria-label="Search" >
+        </form>
         <div class="m-auto mt-4 row row-cols-md-2" id="all-posts" style="width: 70%;">
             <h2 class="m-auto text-center">Please login to view posts!</h2>
+        </div>
+        <div id="loginForm" class="card-group m-auto text-center mt-4" style="width: 70%;">
+            <div class="card rounded shadow me-1">
+                <div class="card-header">
+                    <h3>Login</h3>
+                </div>
+                <div class="card-body">
+                    <form id="login-form">
+                        <input type="email" class="form-control mb-4" id="loginInput" placeholder="name@example.com">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button id="loginUser" class="btn btn-primary border-dark shadow rounded me-2" style="width: 70%;">
+                        Login
+                    </button>
+                </div>
+            </div>
+            <div class="card shadow ms-1 rounded">
+                <div class="card-header">
+                    <h3>Register</h3>
+                </div>
+                <div class="card-body">
+                    <form id="loginForm">
+                        <input type="text" class="form-control mb-4" placeholder="Username" aria-label="Username">
+                        <input type="email" class="form-control mb-4" id="floatingInput" placeholder="name@example.com">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button id="registerUser" class="btn btn-primary border-dark shadow rounded me-2" style="width: 70%;">
+                        Register
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="container mt-4 m-auto" id="create-post" style="display: none;">

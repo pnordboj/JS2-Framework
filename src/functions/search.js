@@ -3,22 +3,20 @@ import { displayError } from "./error/error.js";
 let url = 'https://nf-api.onrender.com/api/v1/social/posts';
 const searchButton = document.querySelector("#searchButton");
 const htmlAll = document.querySelector("#all-posts");
-var storeData = [];
-
+let storeData = [];
 
 searchButton.addEventListener("input", (e) => {
-    let value = e.target.value
-    if (value && value.trim().length > 0) {
-        value = value.trim().toLowerCase()
-        search(storeData.filter(post => {
-            return post.body.includes(value)
-        }))
-    } else {
+    const value = e.target.value.toLowerCase()
+    const filtered = storeData.filter((post) => {
+        return (
+            post.title.toLowerCase().includes(value) || 
+            post.body.toLowerCase().includes(value)
+        );
+    });
+    displayPosts(filtered);
+});
 
-    }
-})
-
-async function search(result) {
+const getPosts = async () => {
     try {
         const options = {
             method: 'GET',
@@ -28,26 +26,39 @@ async function search(result) {
         }
         const response = await fetch(url, options);
         storeData = await response.json();
-        for (const post of result) {
-            htmlAll.innerHTML =
-                `
-                <div class="col mt-2">
-                    <div class="card">
-                        <div class="card-header">
-                        ${post.title}
-                        </div>
-                        <div class="card-body">
-                        ${post.body}
-                        </div>
-                        <div class="card-footer">
-                        <a href="post/?id=${post.id}" class="btn btn-primary">Read more</a>
-                        </div>
+        console.log(storeData);
+        displayPosts(storeData);
+    } catch (error)
+    {   
+        console.log(error);
+        html.innerHTML = displayError('error', error);
+    }
+};
+
+const displayPosts = (data) => {
+    const htmlCard = data.map((post) => {
+        return `
+            <div class="col mt-2">
+                <div class="card">
+                    <div class="card-header">
+                    ${post.title}
+                    </div>
+                    <div class="card-body">
+                    ${post.body}
+                    <br>
+                    <br>
+                    <hr>
+                    <b>Tags:</b> ${post.tags}
+                    </div>
+                    <div class="card-footer">
+                    
+                    <a href="post/?id=${post.id}" class="btn btn-primary">View Post</a>
                     </div>
                 </div>
-                `;
-        }
-    } catch (error) {
-        displayError(error, 'error');
-        console.log('error message: ', error);
-    }
-}
+            </div>
+            `;
+        }).join('');
+        htmlAll.innerHTML = htmlCard;
+};
+
+getPosts();

@@ -1,7 +1,6 @@
 import './functions/Authenticate/login.js';
 import './functions/Authenticate/register.js';
 import './functions/createPost.js';
-import './functions/posts.js';
 import './functions/search.js';
 import './functions/tab.js';
 import './functions/error/error.js';

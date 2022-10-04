@@ -34,8 +34,6 @@ loginUser.onclick = async function() {
             localStorage.setItem("username", data.name);
             localStorage.setItem("access-token", data.accessToken);
         })
-
-        getAllPosts();
     } catch(error) {
         console.log(error);
         htmlLoggedIn.innerHTML = displayError('Error', error);
@@ -54,45 +52,5 @@ export function autoLogin() {
                 Welcome: ${localStorage.getItem('username')}
             </div>
             `;
-        getAllPosts();
-    }
-}
-
-export async function getAllPosts() {
-    try {
-        const urlPost = `https://nf-api.onrender.com/api/v1/social/posts`;
-        const htmlAll = document.querySelector("#all-posts");
-        const optionsPosts = {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-            },
-        }
-        const response = await fetch(urlPost, optionsPosts);
-        const data = await response.json();
-        console.log(data);
-        htmlAll.innerHTML = ``;
-        for(let i = 0; i < data.length; i++) {
-            htmlAll.innerHTML +=
-                `
-                <div class="col mt-2">
-                    <div class="card">
-                        <div class="card-header">
-                        ${data[i].title}
-                        </div>
-                        <div class="card-body">
-                        ${data[i].body}
-                        </div>
-                        <div class="card-footer">
-                        <a href="post/?id=${data[i].id}" class="btn btn-primary">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                `;
-        }
-    } catch (error)
-    {   
-        console.log(error);
-        html.innerHTML = displayError('error', error);
     }
 }

@@ -6,6 +6,7 @@ async function createPost(dataform) {
         
         const titleText = document.getElementById("title-post-text").form[0].value;
         const bodyText = document.getElementById("title-post-text").form[1].value;
+        const tagText = document.getElementById("title-post-text").form[2].value;
 
         const fd = new FormData(form);
         for(const name in dataform) {
@@ -21,9 +22,9 @@ async function createPost(dataform) {
             body: JSON.stringify({
                 title: titleText,
                 body: bodyText,
+                tags: tagText,
             }),
         };
-        console.log(options)
         fetch(url, options)
         .then((response) => response.json())
         .then((json) => console.log(json));

@@ -15,7 +15,7 @@
         <nav class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row">
             <a href="../" class="navbar-brand shadow rounded p-2 mb-sm-2">Social Media Platform</a>
             <div id="loggedInUser" class="d-flex justify-content-end">
-                <button class="btn btn-primary border-dark shadow rounded">
+                <button id="loginUser" class="btn btn-primary border-dark shadow rounded">
                     Login!
                 </button>
                   
@@ -25,19 +25,20 @@
 
     <main>
         <div>
-            <form class="mb-4 form-inline d-flex">
-                <button class="btn btn-outline-light my-2 my-sm-0 m-2" type="submit">Search</button>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" >
-            </form>
             <div class="container" id="view-post" style="width: 50%;">
                 <div class="card mt-3">
                     <div class="card-header" id="post-title">
                     </div>
                     <div class="card-body" id="post-body">
                     </div>
+                    <div class="card-footer" id="post-footer">
+                    </div>
+                    <div class="card-body" id="post-comments">
+                        <h3>User Comments</h3>
+                    </div>
                     <div class="card-footer">
                         <form id="reply-form" class="container">
-                            <a type="submit" class="btn btn-primary m-3" id="reply-button">Reply to Post</a>
+                            <a type="submit" class="btn btn-primary m-3" id="reply-button">Reply to Post NB! WIP</a>
                             <a type="submit" class="btn btn-primary m-3" id="update-button">Update Post</a>
                             <a type="submit" class="btn btn-primary m-3" id="delete-button">Delete Post</a>
                             <input type="text" class="form-control" name="title" id="reply-title"
@@ -53,6 +54,6 @@
     <footer>
 
     </footer>
-    <script type="module" src="../src/post.js"></script>
+    <script type="module" src="../src/post.mjs"></script>
 </body>
 </html>

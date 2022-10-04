@@ -27,13 +27,16 @@
             <button class="btn btn-primary active" id="view-feed-tab">View Feed</button>
             <button class="btn btn-primary" id="create-post-tab">Create Post</button>
         </ul>
-        <form class="container d-flex" style="width: 40%;">
-            <button class="btn btn-primary me-2" type="submit">Clear</button>
-            <input id="searchButton" class="form-control mr-sm-2" type="search" placeholder="Search for a post by id or text" aria-label="Search" >
-        </form>
+        <div id="search-form">
+            <form class="container d-flex" style="width: 40%;">
+                <button class="btn btn-primary me-2" type="submit">Clear</button>
+                <input id="searchButton" type="search" class="form-control mr-sm-2" type="search" placeholder="Search for a post by title or body" aria-label="Search" >
+            </form>
+        </div>
         <div class="m-auto mt-4 row row-cols-md-2" id="all-posts" style="width: 70%;">
             <h2 class="m-auto text-center">Please login to view posts!</h2>
         </div>
+        
         <div id="loginForm" class="card-group m-auto text-center mt-4" style="width: 70%;">
             <div class="card rounded shadow me-1">
                 <div class="card-header">
@@ -70,7 +73,7 @@
             </div>
         </div>
 
-        <div class="container mt-4 m-auto" id="create-post" style="display: none;">
+        <div class="container mt-4 m-auto" id="create-post" style="display: none; width: 70%;">
             <form id="create-post-form">
                 <div class="mb-3">
                     <label for="title-control-input" class="form-label">Title</label>
@@ -78,8 +81,13 @@
                     placeholder="Enter post title..">
                 </div>
                 <div class="mb-3">
-                    <label for="form-control-text" class="form-label">Whats on your mind</label>
+                    <label for="form-control-text" class="form-label">Whats on your mind?</label>
                     <textarea class="form-control" name="body" id="form-control-text create-post-text" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="title-control-input" class="form-label">Add tags</label>
+                    <input type="text" class="form-control" name="tags" id="title-post-tags"
+                    placeholder="Add tags each tag seperated by ,">
                 </div>
                 <div class="mb-3">
                     <button id="createPostButton" type="submit" class="btn btn-primary mb-3">Create Post</button>
@@ -91,6 +99,6 @@
     <footer>
 
     </footer>
-    <script type="module" src="src/home.js"></script>
+    <script type="module" src="src/home.mjs"></script>
 </body>
 </html>

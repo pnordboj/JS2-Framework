@@ -40,7 +40,7 @@ async function viewPost() {
                     <p class="card-text">${comment.body}</p>
                 </div>
                 <div class="card-footer rounded text-muted">
-                    Posted by ${comment.owner} on ${data.created}
+                    Posted by ${comment.owner}
                 </div>
             </div>
             `;

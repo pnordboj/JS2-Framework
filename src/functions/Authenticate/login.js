@@ -33,6 +33,7 @@ loginUser.onclick = async function() {
             `;
             localStorage.setItem("username", data.name);
             localStorage.setItem("access-token", data.accessToken);
+            setTimeout(function(){ window.location.href = "/"; }, 500);
         })
     } catch(error) {
         console.log(error);

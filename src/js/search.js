@@ -46,6 +46,7 @@ const displayPosts = (data) => {
                     <div class="card-body">
                     ${post.body}
                     <br>
+                    <img src="${post.media}" id="post-image" alt=" ">
                     <br>
                     <hr>
                     <b>Tags:</b> ${post.tags}

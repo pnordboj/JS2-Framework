@@ -2,5 +2,5 @@
 @use "./components/footer";
 @use "./components/main";
 
-@import "variables";
+@import "./components/_variables.scss";
 @import "../../node_modules/bootstrap/scss/bootstrap";

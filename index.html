@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Social Media platform for everyone at Noroff!">
     <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/styles.css">
     <title>Social Media Forum</title>
 </head>
 <body>
@@ -27,30 +27,23 @@
             <button class="btn btn-primary active" id="view-feed-tab">View Feed</button>
             <button class="btn btn-primary" id="create-post-tab">Create Post</button>
         </ul>
-        <div id="search-form">
+        <div id="search-form d-flex flex-column">
             <form class="container d-flex" style="width: 40%;">
-                <div class="dropdown me-2">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filters
-                </button>
-                <ul class="dropdown-menu">
+                <input id="searchButton" type="search" class="form-control mr-sm-2" type="search" placeholder="Search for a post by title or body" aria-label="Search" style="height: 5%;">
+                <ul class="container d-flex flex-column">
                     <li class="list-group-item">
                         <input class="form-check-input me-1" type="checkbox" value="" id="filter-comments">
-                        <label class="form-check-label" for="firstCheckbox">Filter by Most Comments</label>
-                      </li>
-                      <li class="list-group-item">
+                        <label class="form-check-label" for="firstCheckbox">Filter by Comments</label>
+                    </li>
+                    <li class="list-group-item">
                         <input class="form-check-input me-1" type="checkbox" value="" id="filter-reactions">
-                        <label class="form-check-label" for="secondCheckbox">Filter by Most Reactions</label>
-                      </li>
-                      <li class="list-group-item">
+                        <label class="form-check-label" for="secondCheckbox">Filter by Reactions</label>
+                    </li>
+                    <li class="list-group-item">
                         <input class="form-check-input me-1" type="checkbox" value="" id="filter-date">
-                        <label class="form-check-label" for="thirdCheckbox">Filter from new to old</label>
-                      </li>
-                    
+                        <label class="form-check-label" for="thirdCheckbox">Filter Old to New</label>
+                    </li>
                 </ul>
-            </div>
-                <button class="btn btn-primary me-2" type="submit">Clear</button>
-                <input id="searchButton" type="search" class="form-control mr-sm-2" type="search" placeholder="Search for a post by title or body" aria-label="Search" >
             </form>
         </div>
         <div class="m-auto mt-4 row row-cols-md-2" id="all-posts" style="width: 70%;">

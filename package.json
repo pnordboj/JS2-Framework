@@ -6,7 +6,7 @@
   "scripts": {
     "docs": "jsdoc -c ./conf.json -r",
     "watch": "sass --watch src/scss:dist/css & live-server",
-    "build": "sass src/scss:dist/css"
+    "build": "sass src/scss:build/css"
   },
   "repository": {
     "type": "git",

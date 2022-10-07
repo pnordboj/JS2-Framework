@@ -1,5 +1,5 @@
-import './functions/ViewPost.js';
-import './functions/Authenticate/login.js';
+import './js/viewPost.js';
+import './js/Authenticate/login.js';
 
 function autoLogin() {
     if (isLoggedIn() === true) {

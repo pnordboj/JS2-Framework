@@ -1,11 +1,11 @@
-import './functions/Authenticate/login.js';
-import './functions/Authenticate/register.js';
-import './functions/createPost.js';
-import './functions/search.js';
-import './functions/tab.js';
-import './functions/error/error.js';
+import './js/Authenticate/login.js';
+import './js/Authenticate/register.js';
+import './js/createPost.js';
+import './js/search.js';
+import './js/tab.js';
+import './js/error/error.js';
 
-import { autoLogin } from './functions/Authenticate/login.js';
+import { autoLogin } from './js/Authenticate/login.js';
 
 // Checks if the access key is stored in localStorage and logs inn automatically
 // Look at login.js line 49 - 59

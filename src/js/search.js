@@ -61,4 +61,45 @@ const displayPosts = (data) => {
         htmlAll.innerHTML = htmlCard;
 };
 
+// Filters
+const filterByComments = () => {
+    const filter = storeData.filter((post) => {
+        return post.comments > 0;
+    });
+    displayPosts(filter);
+}
+
+const filterByReactions = () => {
+    const filter = storeData.filter((post) => {
+        return post.reactions > 0;
+    });
+    displayPosts(filter);
+}
+
+const filterByDate = () => {
+    const filter = storeData.sort((a, b) => {
+        return new Date(a.created) - new Date(b.created);
+    });
+    displayPosts(filter);
+}
+
+const filterCommentsHtml = document.querySelector("#filter-comments");
+const filterReactHtml = document.querySelector("#filter-reactions");
+const filterDateHtml = document.querySelector("#filter-date");
+
+if (filterCommentsHtml.checked) {
+    filterByComments();
+} else if (filterReactHtml.checked) {
+    filterByReactions();
+} else if (filterDateHtml.checked) {
+    filterByDate();
+} else if (filterCommentsHtml.unchecked && filterReactHtml.unchecked && filterDateHtml.unchecked) {
+    getPosts();
+}
+
+
+filterCommentsHtml.addEventListener("click", filterByComments);
+filterDateHtml.addEventListener("click", filterByDate);
+filterReactHtml.addEventListener("click", filterByReactions);
+
 getPosts();

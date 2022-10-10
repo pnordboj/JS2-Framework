@@ -64,15 +64,15 @@ const displayPosts = (data) => {
 
 // Filters
 const filterByComments = () => {
-    const filter = storeData.filter((post) => {
-        return post.comments > 0;
+    const filter = storeData.sort((a, b) => {
+        return b.comments - a.comments;
     });
     displayPosts(filter);
 }
 
 const filterByReactions = () => {
-    const filter = storeData.sort((post) => {
-        return post.reactions > 0;
+    const filter = storeData.sort((a, b) => {
+        return b.reactions - a.reactions;
     });
     displayPosts(filter);
 }

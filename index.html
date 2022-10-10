@@ -28,19 +28,19 @@
             <button class="btn btn-primary" id="create-post-tab">Create Post</button>
         </ul>
         <div id="search-form" class="d-flex flex-column">
-            <form class="container d-flex" style="width: 40%;">
+            <form class="container d-flex" style="width: 60%;">
                 <input id="searchButton" type="search" class="form-control mr-sm-2" type="search" placeholder="Search for a post by title or body" aria-label="Search" style="height: 5%;">
                 <ul class="container d-flex flex-column">
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" value="" id="filter-comments">
+                        <input class="form-check-input me-1" type="radio" name="filter" id="filter-comments">
                         <label class="form-check-label" for="filter-comments">Filter by Comments</label>
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" value="" id="filter-reactions">
+                        <input class="form-check-input me-1" type="radio" name="filter" id="filter-reactions">
                         <label class="form-check-label" for="filter-reactions">Filter by Reactions</label>
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" value="" id="filter-date">
+                        <input class="form-check-input me-1" type="radio" name="filter" id="filter-date">
                         <label class="form-check-label" for="filter-date">Filter Old to New</label>
                     </li>
                     <button class="btn btn-primary mt-2" id="clear-button" style="width: 50%;">Clear Filter</button>

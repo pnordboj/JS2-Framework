@@ -71,7 +71,7 @@ const filterByComments = () => {
 }
 
 const filterByReactions = () => {
-    const filter = storeData.filter((post) => {
+    const filter = storeData.sort((post) => {
         return post.reactions > 0;
     });
     displayPosts(filter);
@@ -84,9 +84,14 @@ const filterByDate = () => {
     displayPosts(filter);
 }
 
+const clearFilter = {
+    getPosts
+}
+
 const filterCommentsHtml = document.querySelector("#filter-comments");
 const filterReactHtml = document.querySelector("#filter-reactions");
 const filterDateHtml = document.querySelector("#filter-date");
+const filterClearButton = document.querySelector("#clear-button");
 
 if (filterCommentsHtml.checked) {
     filterByComments();
@@ -94,13 +99,14 @@ if (filterCommentsHtml.checked) {
     filterByReactions();
 } else if (filterDateHtml.checked) {
     filterByDate();
-} else if (filterCommentsHtml.unchecked && filterReactHtml.unchecked && filterDateHtml.unchecked) {
-    getPosts();
+} else {
+    getPosts
 }
 
 
 filterCommentsHtml.addEventListener("click", filterByComments);
 filterDateHtml.addEventListener("click", filterByDate);
 filterReactHtml.addEventListener("click", filterByReactions);
+filterClearButton.addEventListener("click", clearFilter);
 
 getPosts();

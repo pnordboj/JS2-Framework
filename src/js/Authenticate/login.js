@@ -1,4 +1,4 @@
-import { displayError } from '../error/error.js';
+import { displayError } from '../error/error.mjs';
 
 const urlLogin = `https://nf-api.onrender.com/api/v1/social/auth/login`;
 const htmlLoggedIn = document.querySelector("#loggedInUser");

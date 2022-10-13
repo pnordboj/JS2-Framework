@@ -1,13 +1,13 @@
-import { displayError } from '../error/error.js';
+import { displayError } from '../error/error.mjs';
 
 const url = `https://nf-api.onrender.com/api/v1/social/auth/register`;
 const registerUser = document.querySelector("#registerUser");
 
 registerUser.onclick = async function() {
     try {
-        const username = document.getElementById("login-form")[0].value;
-        const email = document.getElementById("login-form")[1].value;
-        const password = document.getElementById("login-form")[2].value;
+        const username = document.getElementById("loginForm")[0].value;
+        const email = document.getElementById("loginForm")[1].value;
+        const password = document.getElementById("loginForm")[2].value;
         const options = {
             method: 'POST',
             headers: {

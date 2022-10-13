@@ -3,7 +3,7 @@ import './js/Authenticate/register.js';
 import './js/createPost.js';
 import './js/search.js';
 import './js/tab.js';
-import './js/error/error.js';
+import './js/error/error.mjs';
 
 import { autoLogin } from './js/Authenticate/login.js';
 

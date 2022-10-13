@@ -36,7 +36,7 @@ const getPosts = async () => {
     } catch (error)
     {   
         console.log(error);
-        html.innerHTML = displayError('error', error);
+        htmlAll.innerHTML = displayError('error', error);
     }
 };
 

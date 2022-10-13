@@ -3,7 +3,7 @@ import { displayError } from '../error/error.mjs';
 const url = `https://nf-api.onrender.com/api/v1/social/auth/register`;
 const registerUser = document.querySelector("#registerUser");
 
-registerUser.onclick = async function() {
+registerUser.onclick = async function () {
     try {
         const username = document.getElementById("loginForm")[0].value;
         const email = document.getElementById("loginForm")[1].value;

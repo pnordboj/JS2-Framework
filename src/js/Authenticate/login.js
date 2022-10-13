@@ -8,7 +8,7 @@ loginUser.onclick = async function() {
     try {
         const email = document.getElementById("login-form")[0].value;
         const password = document.getElementById("login-form")[1].value;
-        
+
         const options = {
             method: 'POST',
             headers: {
@@ -47,6 +47,8 @@ function isLoggedIn() {
 
 export function autoLogin() {
     if (isLoggedIn() === true) {
+        const loginContainer = document.querySelector("#loginContainer")
+        loginContainer.innerHTML = '';
         const html = document.querySelector("#loggedInUser")
         html.innerHTML = `
             <div class="shadow p-2 bg-body rounded" style="width: rem10;">

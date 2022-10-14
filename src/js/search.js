@@ -32,7 +32,6 @@ const getPosts = async () => {
         }
         const response = await fetch(url, options);
         storeData = await response.json();
-        console.log(storeData);
         displayPosts(storeData);
     } catch (error)
     {   
@@ -61,6 +60,9 @@ const displayPosts = (data) => {
                     <br>
                     <hr>
                     <b>Tags:</b> ${post.tags}
+                    <br>
+                    <b>Reactions:</b> ${post._count.reactions}
+                    <b>Comments:</b> ${post._count.comments}
                     </div>
                     <div class="card-footer">
                     
@@ -80,15 +82,14 @@ const displayPosts = (data) => {
 // Filters WIP
 const filterByComments = () => {
     const filter = storeData.sort((a, b) => {
-        return new Date(a.comments) - new Date(b.comments);
+        return a._count.comments < b._count.comments;
     });
-    console.log(filter);
     displayPosts(filter);
 }
 
 const filterByReactions = () => {
     const filter = storeData.sort((a, b) => {
-        return b.reactions - a.reactions;
+        return a._count.reactions < b._count.reactions;
     });
     displayPosts(filter);
 }
@@ -100,8 +101,12 @@ const filterByDate = () => {
     displayPosts(filter);
 }
 
-const clearFilter = {
-    getPosts
+const clearFilter = (event) => {
+    event.preventDefault();
+    filterCommentsHtml.checked = false;
+    filterDateHtml.checked = false;
+    filterReactHtml.checked = false;
+    getPosts();
 }
 
 const filterCommentsHtml = document.querySelector("#filter-comments");
@@ -124,7 +129,4 @@ filterClearButton.addEventListener("click", clearFilter);
 
 if (isLoggedIn() === true) {
     getPosts();
-} else {
-    console.log("auto login has not happened, due to the",
-    "user never having logged in before!");
 }

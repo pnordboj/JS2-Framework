@@ -8,7 +8,7 @@ registerUser.onclick = async function () {
         const username = document.getElementById("loginForm")[0].value;
         const email = document.getElementById("loginForm")[1].value;
         const password = document.getElementById("loginForm")[2].value;
-        const html = document.querySelector("#all-posts")
+        const html = document.querySelector("#registerLogin-error")
 
         if (username.length === 0) {
             html.innerHTML = ` <div class="alert alert-danger">

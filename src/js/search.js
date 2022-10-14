@@ -1,3 +1,4 @@
+import { isLoggedIn } from "../js/tab.js";
 import { displayError } from "./error/error.mjs";
 
 let url = 'https://nf-api.onrender.com/api/v1/social/posts';
@@ -114,14 +115,16 @@ if (filterCommentsHtml.checked) {
     filterByReactions();
 } else if (filterDateHtml.checked) {
     filterByDate();
-} else {
-    getPosts
 }
-
 
 filterCommentsHtml.addEventListener("click", filterByComments);
 filterDateHtml.addEventListener("click", filterByDate);
 filterReactHtml.addEventListener("click", filterByReactions);
 filterClearButton.addEventListener("click", clearFilter);
 
-getPosts();
+if (isLoggedIn() === true) {
+    getPosts();
+} else {
+    console.log("auto login has not happened, due to the",
+    "user never having logged in before!");
+}

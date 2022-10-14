@@ -47,6 +47,12 @@ function isLoggedIn() {
 
 export function autoLogin() {
     if (isLoggedIn() === true) {
+        const tabs = document.getElementById('tab');
+        tabs.classList.replace("d-none", "d-flex");
+
+        const searchForm = document.getElementById('search-form');
+        searchForm.classList.replace("d-none", "d-flex");
+
         const loginContainer = document.querySelector("#loginContainer")
         loginContainer.innerHTML = '';
         const html = document.querySelector("#loggedInUser")

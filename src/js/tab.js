@@ -14,7 +14,7 @@ const searchForm = document.querySelector("#search-form");
  * if(isLoggedIn() === true)
  *      // Do something...
  */
-function isLoggedIn() {
+export function isLoggedIn() {
     return Boolean(localStorage.getItem('access-token'));
 }
 
@@ -29,14 +29,12 @@ if (isLoggedIn() === true) {
 htmlViewFeed.onclick = function() {
     if (htmlViewFeed.classList.contains("active")) {
         viewFeed.style.display = "flex";
-        searchForm.classList.add = "d-flex";
-        searchForm.style.display = "flex";
+        searchForm.classList.replace("d-none", "d-flex");
         createPost.style.display = "none";
     } else {
         htmlViewFeed.classList.add("active")
         viewFeed.style.display = "flex";
-        searchForm.classList.add = "d-flex";
-        searchForm.style.display = "flex";
+        searchForm.classList.replace("d-none", "d-flex");
         createPost.style.display = "none";
         if (htmlCreatePost.classList.contains("active")) {
             htmlCreatePost.classList.remove("active")
@@ -48,14 +46,12 @@ htmlCreatePost.onclick = function() {
     if (htmlCreatePost.classList.contains("active")) {
         createPost.style.display = "block";
         viewFeed.style.display = "none";
-        searchForm.style.display = "none";
-        searchForm.classList.remove = "d-flex";
+        searchForm.classList.replace("d-flex", "d-none");
     } else {
         htmlCreatePost.classList.add("active")
         createPost.style.display = "block";
         viewFeed.style.display = "none";
-        searchForm.style.display = "none";
-        searchForm.classList.remove = "d-flex";
+        searchForm.classList.replace("d-flex", "d-none");
         if (htmlViewFeed.classList.contains("active")) {
             htmlViewFeed.classList.remove("active")
         }

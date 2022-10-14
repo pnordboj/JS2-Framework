@@ -1,3 +1,8 @@
+/**
+ * register.js handles the registration function for the website 
+ * also storing data into localStorage
+ */
+
 import { displayError } from '../error/error.mjs';
 
 const url = `https://nf-api.onrender.com/api/v1/social/auth/register`;

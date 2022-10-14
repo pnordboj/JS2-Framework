@@ -1,5 +1,9 @@
 // Used to switch between View feed, Create Post and Search post
 
+/**
+ * Tab.js is used to switch between View Post and Create Post
+ */
+
 const htmlViewFeed = document.getElementById('view-feed-tab');
 const htmlCreatePost = document.querySelector("#create-post-tab");
 const htmlloginForm = document.querySelector("#loginForm");

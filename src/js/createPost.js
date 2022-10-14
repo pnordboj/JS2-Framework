@@ -1,3 +1,7 @@
+/**
+ * createPosts.js contains the method createPost, 
+ * the function that makes it possible to create a post on the web page.
+ */
 
 async function createPost() {
     try {

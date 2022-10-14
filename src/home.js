@@ -1,3 +1,7 @@
+/**
+ * home.js combines all the javascript files together for the index.html page
+ */
+
 import './js/Authenticate/login.js';
 import './js/Authenticate/register.js';
 import './js/createPost.js';

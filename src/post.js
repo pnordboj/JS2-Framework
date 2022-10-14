@@ -1,3 +1,7 @@
+/**
+ * post.js combines all the javascript files together for the post.html page
+ */
+
 import './js/viewPost.js';
 import './js/Authenticate/login.js';
 

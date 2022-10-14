@@ -1,3 +1,7 @@
+/**
+ * search.js handles users searching for posts and filters
+ */
+
 import { isLoggedIn } from "../js/tab.js";
 import { displayError } from "./error/error.mjs";
 

@@ -1,5 +1,6 @@
 # JavaScript Framework CA
-
+View website at
+https://jsframwork.patricknj.dev/ "Social Media Platform"
 ## How to install
 ### Step 1, Clone
 * HTTPS: git clone https://github.com/pnordboj/JS2-Framework.git

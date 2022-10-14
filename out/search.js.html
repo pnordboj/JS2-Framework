@@ -26,17 +26,32 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { displayError } from "./error/error.mjs";
+            <pre class="prettyprint source linenums"><code>import { isLoggedIn } from "../js/tab.js";
+import { displayError } from "./error/error.mjs";
 
 let url = 'https://nf-api.onrender.com/api/v1/social/posts';
 const searchButton = document.querySelector("#searchButton");
 const htmlAll = document.querySelector("#all-posts");
 let storeData = [];
 
+/** 
+ * Update the value of url on the search
+ * @param {String} ev event
+ **/
+
 searchButton.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase()
+    /**
+     * Capture the change in input value and make a query to the API url
+     * @param {String} value Fetching query for the data in the backend
+     */
     const filtered = storeData.filter((post) => {
         return (
+            /** 
+             * @return post.title.toLowerCase().match(value) != null
+             * @return post.body.toLowerCase().match(value) != null
+             * Reference: https://stackoverflow.com/questions/61323656/how-to-search-by-title-defined-in-array
+            */
             post.title.toLowerCase().includes(value) || 
             post.body.toLowerCase().includes(value)
         );
@@ -44,13 +59,9 @@ searchButton.addEventListener("input", (e) => {
     displayPosts(filtered);
 });
 
-/**
- * getPosts calls the API and returns the JSON array
- * that displaysPosts uses to return the data as HTML for the user to view.
- */
-
 const getPosts = async () => {
     try {
+
         const options = {
             method: 'GET',
             headers: {
@@ -58,13 +69,18 @@ const getPosts = async () => {
             }
         }
         const response = await fetch(url, options);
+        /**
+         * Fetch all posts
+         * storeData stores the data retrieved from the url of the api
+         * @return displayPosts(storeData) in the Fetch api this returns the post's data
+         * After it is stored it can be used as a global variable and refrenced later on
+         */
         storeData = await response.json();
-        console.log(storeData);
         displayPosts(storeData);
     } catch (error)
     {   
         console.log(error);
-        html.innerHTML = displayError('error', error);
+        htmlAll.innerHTML = displayError('error', error);
     }
 };
 
@@ -72,6 +88,13 @@ const getPosts = async () => {
  * displayPosts returns all the posts in the API as HTML
  * And is also being used for the search function and filters.
  */
+
+/** 
+ * displayPosts returns all the posts filtered
+ * by number of comments, reactions and the date the post was created, from old to new
+ * it also uses the search button in case a query was made
+ * @param {Object} data storeData
+*/
 
 const displayPosts = (data) => {
     const htmlCard = data.map((post) => {
@@ -88,9 +111,11 @@ const displayPosts = (data) => {
                     &lt;br>
                     &lt;hr>
                     &lt;b>Tags:&lt;/b> ${post.tags}
+                    &lt;br>
+                    &lt;b>Reactions:&lt;/b> ${post._count.reactions}
+                    &lt;b>Comments:&lt;/b> ${post._count.comments}
                     &lt;/div>
-                    &lt;div class="card-footer">
-                    
+                    &lt;div class="card-footer">           
                     &lt;a href="post/?id=${post.id}" class="btn btn-primary">View Post&lt;/a>
                     &lt;/div>
                 &lt;/div>
@@ -101,33 +126,51 @@ const displayPosts = (data) => {
 };
 
 /**
- * @return The filters is WIP
+ * Filters for comments, reactions and date creation
  */
 
-// Filters WIP
 const filterByComments = () => {
+    /**
+     * Comments are filterd by the count value from the API, form high to low
+     * @return displayPosts(filter) the filtered data is displayed on the frontend
+     */
     const filter = storeData.sort((a, b) => {
-        return b.comments - a.comments;
+        return a._count.comments &lt; b._count.comments;
     });
     displayPosts(filter);
 }
 
 const filterByReactions = () => {
+    /**
+     * Reactions are filterd by the count value from the API, from high to low
+     * @return displayPosts(filter) the filtered data is displayed on the frontend
+     */
     const filter = storeData.sort((a, b) => {
-        return b.reactions - a.reactions;
+        return a._count.reactions &lt; b._count.reactions;
     });
     displayPosts(filter);
 }
 
 const filterByDate = () => {
+    /**
+     * Posts are filtered by the date it was created from old to new
+     * @return displayPosts(filter) the filtered data is displayed on the frontend
+     */
     const filter = storeData.sort((a, b) => {
         return new Date(a.created) - new Date(b.created);
     });
     displayPosts(filter);
 }
 
-const clearFilter = {
-    getPosts
+const clearFilter = (event) => {
+    /**
+     * clearFilter resets the filters, once they are selected or query began
+     */
+    event.preventDefault();
+    filterCommentsHtml.checked = false;
+    filterDateHtml.checked = false;
+    filterReactHtml.checked = false;
+    getPosts();
 }
 
 const filterCommentsHtml = document.querySelector("#filter-comments");
@@ -141,17 +184,16 @@ if (filterCommentsHtml.checked) {
     filterByReactions();
 } else if (filterDateHtml.checked) {
     filterByDate();
-} else {
-    getPosts
 }
-
 
 filterCommentsHtml.addEventListener("click", filterByComments);
 filterDateHtml.addEventListener("click", filterByDate);
 filterReactHtml.addEventListener("click", filterByReactions);
 filterClearButton.addEventListener("click", clearFilter);
 
-getPosts();</code></pre>
+if (isLoggedIn() === true) {
+    getPosts();
+}</code></pre>
         </article>
     </section>
 
@@ -161,13 +203,13 @@ getPosts();</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#displayPosts">displayPosts</a></li><li><a href="global.html#filterByComments">filterByComments</a></li><li><a href="global.html#getPosts">getPosts</a></li><li><a href="global.html#isLoggedIn">isLoggedIn</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#autoLogin">autoLogin</a></li><li><a href="global.html#displayPosts">displayPosts</a></li><li><a href="global.html#filterByComments">filterByComments</a></li><li><a href="global.html#isLoggedIn">isLoggedIn</a></li><li><a href="global.html#viewPost">viewPost</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Oct 13 2022 12:50:16 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Oct 14 2022 12:58:45 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

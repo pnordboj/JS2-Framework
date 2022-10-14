@@ -20,3 +20,14 @@
     index.html and open with Liveserver 
     while the compiler is running
 ```
+* If you have added documentation to the web page you can compile it using 
+```bash
+  npm run docs
+```
+```bash
+  To create documentation use /** and close it with */
+  Example
+  /**
+  * Good documentation
+  */
+```

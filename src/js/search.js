@@ -79,8 +79,9 @@ const displayPosts = (data) => {
 // Filters WIP
 const filterByComments = () => {
     const filter = storeData.sort((a, b) => {
-        return b.comments - a.comments;
+        return new Date(a.comments) - new Date(b.comments);
     });
+    console.log(filter);
     displayPosts(filter);
 }
 

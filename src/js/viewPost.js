@@ -21,7 +21,7 @@ async function viewPost() {
         const response = await fetch(url, options);
         const data = await response.json();
         console.log(data);
-        postTitle.innerHTML = data.title;
+        postTitle.innerHTML = `<h4>${data.title}</h4>`;
         postBody.innerHTML = `${data.body} <br> 
         <img src="${data.media}" class="img-fluid rounded" style="width: 50%;" alt=" ">
         <br> <b>Tags:</b> ${data.tags}`;
@@ -63,12 +63,8 @@ form.addEventListener('submit', noRefresh);
 replyButton.onclick = function(dataform) {
     try {
         const url = `https://nf-api.onrender.com/api/v1/social/posts/${id}/comment`;
-        const bodyText = document.getElementById("reply-form")[1].value;
+        const bodyText = document.getElementById("comment-form")[0].value;
         console.log(bodyText);
-        const fd = new FormData(form);
-        for(const name in dataform) {
-            fd.append(name, dataform[name]);
-        }
 
         const options = {
             method: 'POST',
@@ -94,8 +90,8 @@ const updateButton = document.querySelector("#update-button");
 
 updateButton.onclick = async function() {
     const url = `https://nf-api.onrender.com/api/v1/social/posts/${id}`;
-    const titleText = document.getElementById("reply-form")[0].value;
-    const bodyText = document.getElementById("reply-form")[1].value;
+    const titleText = document.getElementById("update-form")[0].value;
+    const bodyText = document.getElementById("update-form")[1].value;
     const options = {
         method: 'PUT',
         headers: {
@@ -110,6 +106,7 @@ updateButton.onclick = async function() {
     const response = await fetch(url, options);
     const data = await response.json();
     console.log(data);
+    alert("Post updated!");
     window.location.href = "../";
 }
 
@@ -125,5 +122,6 @@ deleteButton.onclick = async function() {
     }
     const response = await fetch(url, options);
     const data = await response.json();
+    alert("Post deleted!");
     window.location.href = "../";
 }

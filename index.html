@@ -37,20 +37,23 @@
                     <li class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="filter" id="filter-comments">
                         <label class="form-check-label" for="filter-comments">Filter by Comments</label>
+                        <label class="form-check-label text-muted">High to low</label>
                     </li>
                     <li class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="filter" id="filter-reactions">
                         <label class="form-check-label" for="filter-reactions">Filter by Reactions</label>
+                        <label class="form-check-label text-muted">High to low</label>
                     </li>
                     <li class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="filter" id="filter-date">
-                        <label class="form-check-label" for="filter-date">Filter Old to New</label>
+                        <label class="form-check-label" for="filter-date">Filter by date created</label>
+                        <label class="form-check-label text-muted">Old to new</label>
                     </li>
                     <button type="button" class="btn btn-primary mt-2" id="clear-button" style="width: 50%;">Clear Filter</button>
                 </ul>
             </form>
         </div>
-        <div class="m-auto mt-4 row row-cols-md-2" id="all-posts" style="width: 70%;">
+        <div class="m-auto mt-4 row row-cols-md-3" id="all-posts" style="width: 90%;">
             <h2 class="m-auto text-center">Please login to view posts!</h2>
         </div>
         <div class="m-auto text-center" id="registerLogin-error">

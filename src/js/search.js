@@ -76,7 +76,7 @@ const displayPosts = (data) => {
     const htmlCard = data.map((post) => {
         return `
             <div class="col mt-2">
-                <div class="card">
+                <div class="card col">
                     <div class="card-header">
                     ${post.title}
                     </div>

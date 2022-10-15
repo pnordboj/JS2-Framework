@@ -34,7 +34,7 @@ registerUser.onclick = async function () {
          * @return {Boolean}
          **/
 
-        if (checkEmail(email.length, 0) === false) {
+        if (checkEmail(email) === false) {
             html.innerHTML = ` <div class="alert alert-danger">
             Error! Email Adress is invalid or missing!
             <br>
@@ -47,8 +47,9 @@ registerUser.onclick = async function () {
         }
 
         function checkEmail(email) {
-            const regEx = /\S+@\S+\.\S+\*@(noroff|stud.noroff).no$/;
+            const regEx = /\@(noroff|stud.noroff)\.no$/i;
             const match = regEx.test(email);
+            console.log(match)
             return match;
         }
 

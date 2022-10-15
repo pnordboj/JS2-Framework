@@ -8,6 +8,7 @@ import { displayError } from '../error/error.mjs';
 const urlLogin = `https://nf-api.onrender.com/api/v1/social/auth/login`;
 const htmlLoggedIn = document.querySelector("#loggedInUser");
 const loginUser = document.querySelector("#loginUser");
+const logoutButton = document.querySelector("#logout")
 
 /**
  * Shows the login-form if user is NOT loggin
@@ -19,6 +20,34 @@ loginUser.onclick = async function() {
     try {
         const email = document.getElementById("login-form")[0].value;
         const password = document.getElementById("login-form")[1].value;
+        const html = document.querySelector("#registerLogin-error")
+
+        if (checkEmail(email) === false) {
+            html.innerHTML = ` <div class="alert alert-danger">
+            Error! Email Adress is invalid or missing!
+            <br>
+            Email Address must be: 
+            <br>
+            <b>user@noroff.no</b> or <b>user@stud.noroff.no</b>
+            </div>
+            `;
+            return
+        }
+
+        function checkEmail(email) {
+            const regEx = /\@(noroff|stud.noroff)\.no$/i;
+            const match = regEx.test(email);
+            console.log(match)
+            return match;
+        }
+
+        if (password.length < 8) {
+            html.innerHTML = ` <div class="alert alert-danger">
+            Error, Password is required and must be atleast 8 characters long!
+            </div>
+            `;
+            return
+        }
 
         /**
          * Run a fetch request to check if the user credentials are valid
@@ -54,11 +83,21 @@ loginUser.onclick = async function() {
          * **/
 
         .then(function (data) {
-            htmlLoggedIn.innerHTML = `
-            <div class="shadow p-2 bg-body rounded" style="width: rem10;">
-                Welcome: ${data.name}
-            </div>
+            if(data.name === 'undefined') {
+                html.innerHTML = ` <div class="alert alert-danger">
+                    User is not authorized, make sure the credentials are correct
+                    <br>
+                    And that the user exists!
+                </div>
+                `;
+                return
+            } else {
+                htmlLoggedIn.innerHTML = `
+                <div class="shadow p-2 bg-body rounded" style="width: rem10;">
+                    Welcome: ${data.name}
+                </div>
             `;
+            }
             /** 
              * Return the access-token value as the result of the promise
              * @return {String}
@@ -79,7 +118,19 @@ loginUser.onclick = async function() {
  * **/
 
 function isLoggedIn() {
-    return Boolean(localStorage.getItem('access-token'));
+    const html = document.querySelector("#registerLogin-error")
+    if (localStorage.getItem('access-token') === 'undefined') {
+        localStorage.clear;
+        html.innerHTML = ` <div class="alert alert-danger">
+                    User is not authorized, make sure the credentials are correct
+                    <br>
+                    And that the user exists!
+                </div>
+                `;
+        return false
+    } else if (localStorage.getItem('access-token') !== 'undefined') {
+        return Boolean(localStorage.getItem('access-token'));
+    }
 }
 
 /**
@@ -97,14 +148,20 @@ export function autoLogin() {
 
         const loginContainer = document.querySelector("#loginContainer")
         loginContainer.innerHTML = '';
-        const html = document.querySelector("#loggedInUser")
         /**
          * Get the username from localStorage
          **/
+        const html = document.querySelector("#loggedInUser")
         html.innerHTML = `
-            <div class="shadow p-2 bg-body rounded" style="width: rem10;">
-                Welcome: ${localStorage.getItem('username')}
-            </div>
-            `;
+        <div class="shadow p-2 bg-body rounded" style="width: rem10;">
+            Welcome: ${localStorage.getItem('username')}
+        </div>
+        `;
+        logoutButton.classList.replace("d-none", "d-flex");
     }
+}
+
+logoutButton.onclick = function logout() {
+    localStorage.clear();
+    window.location.href = "/";
 }

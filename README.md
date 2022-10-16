@@ -1,10 +1,14 @@
 # JavaScript Framework CA
-View website [Social Media Platform](https://jsframwork.patricknj.dev/) 
+
+View website [Social Media Platform](https://jsframwork.patricknj.dev/)
+
 ## How to install
+
 ### Step 1, Clone
-* HTTPS: git clone https://github.com/pnordboj/JS2-Framework.git
-* SSH: git clone git@github.com:pnordboj/JS2-Framework.git
-* gh repo clone pnordboj/JS2-Framework
+
+- HTTPS: git clone https://github.com/pnordboj/JS2-Framework.git
+- SSH: git clone git@github.com:pnordboj/JS2-Framework.git
+- gh repo clone pnordboj/JS2-Framework
 
 ### Step 2, install
 
@@ -14,16 +18,20 @@ View website [Social Media Platform](https://jsframwork.patricknj.dev/)
 ```
 
 ### Step 3, Run Compiler and Liveserver
+
 ```bash
     npm run watch
     If the live server dosen't run, right click on
-    index.html and open with Liveserver 
+    index.html and open with Liveserver
     while the compiler is running
 ```
-* If you have added documentation to the web page you can compile it using 
+
+- If you have added documentation to the web page you can compile it using
+
 ```bash
   npm run docs
 ```
+
 ```bash
   To create documentation use /** and close it with */
   Example

@@ -1,130 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Social Media platform for everyone at Noroff!">
-    <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico">
-    <link rel="stylesheet" href="dist/css/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Social Media platform for everyone at Noroff!"
+    />
+    <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico" />
+    <link rel="stylesheet" href="dist/css/styles.css" />
     <title>Social Media Forum</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row">
-            <div class="d-flex">
-                <button type="button" id="logout" class="d-none shadow me-4 btn btn-secondary" onclick="logout()">
-                    Logout
-                </button>
-                <div id="loggedInUser" class="d-flex justify-content-end">
-                    <div class="shadow p-2 bg-body rounded" style="width: rem10;">
-                        Not Logged inn, please login!
-                    </div>
-                </div>
+      <nav
+        class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row"
+      >
+        <div class="d-flex">
+          <button
+            type="button"
+            id="logout"
+            class="d-none shadow me-4 btn btn-secondary"
+            onclick="logout()"
+          >
+            Logout
+          </button>
+          <div id="loggedInUser" class="d-flex justify-content-end">
+            <div class="shadow p-2 bg-body rounded" style="width: rem10">
+              Not Logged inn, please login!
             </div>
-            <a href="/" class="navbar-brand shadow rounded p-2 mb-sm-2">Social Media Platform</a>
-            <div class="d-flex">
-                <a class="btn btn-light" href="/out/index.html">Documentation</a>
-            </div>
-        </nav>
+          </div>
+        </div>
+        <a href="/" class="navbar-brand shadow rounded p-2 mb-sm-2"
+          >Social Media Platform</a
+        >
+        <div class="d-flex">
+          <a class="btn btn-light" href="/out/index.html">Documentation</a>
+        </div>
+      </nav>
     </header>
     <main>
-        <ul class="btn-group d-none container mt-4" id="tab" style="width: 50%;">
-            <button class="btn btn-primary active" id="view-feed-tab">View Feed</button>
-            <button class="btn btn-primary" id="create-post-tab">Create Post</button>
-        </ul>
-        <div id="search-form" class="d-none flex-column">
-            <form class="container d-flex" style="width: 60%;">
-                <input id="searchButton" type="search" class="form-control mr-sm-2" type="search" placeholder="Search for a post by title or body" aria-label="Search" style="height: 5%;">
-                <ul class="container d-flex flex-column">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="filter" id="filter-comments">
-                        <label class="form-check-label" for="filter-comments">Filter by Comments</label>
-                        <label class="form-check-label text-muted">High to low</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="filter" id="filter-reactions">
-                        <label class="form-check-label" for="filter-reactions">Filter by Reactions</label>
-                        <label class="form-check-label text-muted">High to low</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="filter" id="filter-date">
-                        <label class="form-check-label" for="filter-date">Filter by date created</label>
-                        <label class="form-check-label text-muted">Old to new</label>
-                    </li>
-                    <button type="button" class="btn btn-primary mt-2" id="clear-button" style="width: 50%;">Clear Filter</button>
-                </ul>
+      <ul class="btn-group d-none container mt-4" id="tab" style="width: 50%">
+        <button class="btn btn-primary active" id="view-feed-tab">
+          View Feed
+        </button>
+        <button class="btn btn-primary" id="create-post-tab">
+          Create Post
+        </button>
+      </ul>
+      <div id="search-form" class="d-none flex-column">
+        <form class="container d-flex" style="width: 60%">
+          <input
+            id="searchButton"
+            type="search"
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search for a post by title or body"
+            aria-label="Search"
+            style="height: 5%"
+          />
+          <ul class="container d-flex flex-column">
+            <li class="list-group-item">
+              <input
+                class="form-check-input me-1"
+                type="radio"
+                name="filter"
+                id="filter-comments"
+              />
+              <label class="form-check-label" for="filter-comments"
+                >Filter by Comments</label
+              >
+              <label class="form-check-label text-muted">High to low</label>
+            </li>
+            <li class="list-group-item">
+              <input
+                class="form-check-input me-1"
+                type="radio"
+                name="filter"
+                id="filter-reactions"
+              />
+              <label class="form-check-label" for="filter-reactions"
+                >Filter by Reactions</label
+              >
+              <label class="form-check-label text-muted">High to low</label>
+            </li>
+            <li class="list-group-item">
+              <input
+                class="form-check-input me-1"
+                type="radio"
+                name="filter"
+                id="filter-date"
+              />
+              <label class="form-check-label" for="filter-date"
+                >Filter by date created</label
+              >
+              <label class="form-check-label text-muted">Old to new</label>
+            </li>
+            <button
+              type="button"
+              class="btn btn-primary mt-2"
+              id="clear-button"
+              style="width: 50%"
+            >
+              Clear Filter
+            </button>
+          </ul>
+        </form>
+      </div>
+      <div
+        class="m-auto mt-4 row row-cols-md-3"
+        id="all-posts"
+        style="width: 90%"
+      >
+        <h2 class="m-auto text-center">Please login to view posts!</h2>
+      </div>
+      <div class="m-auto text-center" id="registerLogin-error"></div>
+      <div
+        id="loginContainer"
+        class="card-group m-auto text-center mt-4"
+        style="width: 70%"
+      >
+        <div class="card rounded shadow me-1">
+          <div class="card-header">
+            <h3>Login</h3>
+          </div>
+          <div class="card-body">
+            <form id="login-form">
+              <input
+                type="email"
+                class="form-control mb-4"
+                id="loginInput"
+                placeholder="name@example.com"
+                required
+              />
+              <input
+                type="password"
+                class="form-control"
+                id="loginPassword"
+                placeholder="Password"
+                required
+              />
             </form>
+          </div>
+          <div class="card-footer">
+            <button
+              id="loginUser"
+              class="btn btn-primary border-dark shadow rounded me-2"
+              style="width: 70%"
+            >
+              Login
+            </button>
+          </div>
         </div>
-        <div class="m-auto mt-4 row row-cols-md-3" id="all-posts" style="width: 90%;">
-            <h2 class="m-auto text-center">Please login to view posts!</h2>
-        </div>
-        <div class="m-auto text-center" id="registerLogin-error">
-            
-        </div>
-        <div id="loginContainer" class="card-group m-auto text-center mt-4" style="width: 70%;">
-            <div class="card rounded shadow me-1">
-                <div class="card-header">
-                    <h3>Login</h3>
-                </div>
-                <div class="card-body">
-                    <form id="login-form">
-                        <input type="email" class="form-control mb-4" id="loginInput" placeholder="name@example.com" required>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button id="loginUser" class="btn btn-primary border-dark shadow rounded me-2" style="width: 70%;">
-                        Login
-                    </button>
-                </div>
-            </div>
-            <div class="card shadow ms-1 rounded">
-                <div class="card-header">
-                    <h3>Register</h3>
-                </div>
-                <div class="card-body">
-                    <form id="loginForm">
-                        <input type="text" class="form-control mb-4" placeholder="Username" aria-label="Username" required>
-                        <input type="email" class="form-control mb-4" id="floatingInput" placeholder="name@noroff.no or name@stud.noroff.no" required>
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password | Must be atleast 8 characters" required>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button id="registerUser" class="btn btn-primary border-dark shadow rounded me-2" style="width: 70%;">
-                        Register
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-4 m-auto" id="create-post" style="display: none; width: 70%;">
-            <form id="create-post-form">
-                <div class="mb-3">
-                    <label for="title-control-input" class="form-label">Title</label>
-                    <input type="text" class="form-control" name="title" id="title-post-text"
-                    placeholder="Enter post title..">
-                </div>
-                <div class="mb-3">
-                    <label for="form-control-text" class="form-label">Whats on your mind?</label>
-                    <textarea class="form-control" name="body" id="form-control-text create-post-text" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="title-control-input" class="form-label">Add tags</label>
-                    <input type="text" class="form-control" name="tags" id="title-post-tags"
-                    placeholder="Add tags each tag seperated by ,">
-                </div>
-                <div class="mb-3">
-                    <button id="createPostButton" type="submit" class="btn btn-primary mb-3">Create Post</button>
-                </div>
+        <div class="card shadow ms-1 rounded">
+          <div class="card-header">
+            <h3>Register</h3>
+          </div>
+          <div class="card-body">
+            <form id="loginForm">
+              <input
+                type="text"
+                class="form-control mb-4"
+                placeholder="Username"
+                aria-label="Username"
+                required
+              />
+              <input
+                type="email"
+                class="form-control mb-4"
+                id="floatingInput"
+                placeholder="name@noroff.no or name@stud.noroff.no"
+                required
+              />
+              <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password | Must be atleast 8 characters"
+                required
+              />
             </form>
+          </div>
+          <div class="card-footer">
+            <button
+              id="registerUser"
+              class="btn btn-primary border-dark shadow rounded me-2"
+              style="width: 70%"
+            >
+              Register
+            </button>
+          </div>
         </div>
+      </div>
 
+      <div
+        class="container mt-4 m-auto"
+        id="create-post"
+        style="display: none; width: 70%"
+      >
+        <form id="create-post-form">
+          <div class="mb-3">
+            <label for="title-control-input" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              id="title-post-text"
+              placeholder="Enter post title.."
+            />
+          </div>
+          <div class="mb-3">
+            <label for="form-control-text" class="form-label"
+              >Whats on your mind?</label
+            >
+            <textarea
+              class="form-control"
+              name="body"
+              id="form-control-text create-post-text"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="title-control-input" class="form-label">Add tags</label>
+            <input
+              type="text"
+              class="form-control"
+              name="tags"
+              id="title-post-tags"
+              placeholder="Add tags each tag seperated by ,"
+            />
+          </div>
+          <div class="mb-3">
+            <button
+              id="createPostButton"
+              type="submit"
+              class="btn btn-primary mb-3"
+            >
+              Create Post
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
-    <footer>
-
-    </footer>
+    <footer></footer>
     <script type="module" src="src/home.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

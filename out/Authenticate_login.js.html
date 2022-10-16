@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: Authenticate/login.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: Authenticate/login.js</h1>
+
+      <section>
+        <article>
+          <pre class="prettyprint source linenums"><code>/**
+ * login.js handles the login functions for the web site
+ * Also handles the autologin feature that the page provides.
+ */
+
+import { displayError } from '../error/error.mjs';
+
+const urlLogin = `https://nf-api.onrender.com/api/v1/social/auth/login`;
+const htmlLoggedIn = document.querySelector("#loggedInUser");
+const loginUser = document.querySelector("#loginUser");
+
+/**
+ * Shows the login-form if user is NOT loggin
+ * refreshes page if user is logged in and displays posts
+ * 
+ */
+
+loginUser.onclick = async function() {
+    try {
+        const email = document.getElementById("login-form")[0].value;
+        const password = document.getElementById("login-form")[1].value;
+
+        /**
+         * Run a fetch request to check if the user credentials are valid
+         * @param {String} email
+         * @param {String} password
+         * @return {Boolean}
+         * **/
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+        }
+
+        /** 
+         * The fetch function returns a promise of a response body
+         * @type {Response}
+         * **/
+
+        fetch(urlLogin, options)
+        .then((response) => response.json())
+        .then((json) => {
+            return json
+        })
+
+        /** 
+         * process the response body as json and extract the access-token value
+         * @type {String}
+         * **/
+
+        .then(function (data) {
+            htmlLoggedIn.innerHTML = `
+            &lt;div class="shadow p-2 bg-body rounded" style="width: rem10;">
+                Welcome: ${data.name}
+            &lt;/div>
+            `;
+            /** 
+             * Return the access-token value as the result of the promise
+             * @return {String}
+             * **/
+            localStorage.setItem("username", data.name);
+            localStorage.setItem("access-token", data.accessToken);
+            setTimeout(function(){ window.location.href = "/"; }, 500);
+        })
+    } catch(error) {
+        console.log(error);
+        htmlLoggedIn.innerHTML = displayError('Error', error);
+    }
+}
+
+/** 
+ * Checks if the logged in status is stored in localStorage
+ * @return {Boolean}
+ * **/
+
+function isLoggedIn() {
+    return Boolean(localStorage.getItem('access-token'));
+}
+
+/**
+ * autorun if the isLoggedIn function returns true
+ * If true then append to the logged in HTML body
+ * **/
+
+export function autoLogin() {
+    if (isLoggedIn() === true) {
+        const tabs = document.getElementById('tab');
+        tabs.classList.replace("d-none", "d-flex");
+
+        const searchForm = document.getElementById('search-form');
+        searchForm.classList.replace("d-none", "d-flex");
+
+        const loginContainer = document.querySelector("#loginContainer")
+        loginContainer.innerHTML = '';
+        const html = document.querySelector("#loggedInUser")
+        /**
+         * Get the username from localStorage
+         **/
+        html.innerHTML = `
+            &lt;div class="shadow p-2 bg-body rounded" style="width: rem10;">
+                Welcome: ${localStorage.getItem('username')}
+            &lt;/div>
+            `;
+    }
+}</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#autoLogin">autoLogin</a></li>
+        <li><a href="global.html#createPost">createPost</a></li>
+        <li><a href="global.html#displayPosts">displayPosts</a></li>
+        <li><a href="global.html#filterByComments">filterByComments</a></li>
+        <li><a href="global.html#htmlViewFeed">htmlViewFeed</a></li>
+        <li><a href="global.html#isLoggedIn">isLoggedIn</a></li>
+        <li><a href="global.html#viewPost">viewPost</a></li>
+      </ul>
+      <h3>Search.JS</h3>
+      <ul>
+        <li><a href="search.js.html">Search.js Documentation</a></li>
+      </ul>
+      <h3>Login.JS</h3>
+      <ul>
+        <li><a href="Authenticate_login.js.html">Login.js Documentation</a></li>
+      </ul>
+      <h3>Register.JS</h3>
+      <ul>
+        <li>
+          <a href="Authenticate_register.js.html">Register.js Documentation</a>
+        </li>
+      </ul>
+      <h3>createPost.JS</h3>
+      <ul>
+        <li><a href="createPost.js.html">createPost.js Documentation</a></li>
+      </ul>
+      <h3>Tab.JS</h3>
+      <ul>
+        <li><a href="tab.js.html">Tab.js Documentation</a></li>
+      </ul>
+      <h3>viewPost.JS</h3>
+      <ul>
+        <li><a href="viewPost.js.html">viewPost.js Documentation</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Oct 14
+      2022 13:17:27 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

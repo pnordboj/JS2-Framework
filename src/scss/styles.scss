@@ -1,6 +1,6 @@
-@use "./components/header";
-@use "./components/footer";
-@use "./components/main";
+@use "./components/_header";
+@use "./components/_footer";
+@use "./components/_main";
 
 @import "./components/_variables.scss";
 @import "../../node_modules/bootstrap/scss/bootstrap";

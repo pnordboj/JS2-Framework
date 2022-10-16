@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: search.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: search.js</h1>
+
+      <section>
+        <article>
+          <pre class="prettyprint source linenums"><code>/**
+ * search.js handles users searching for posts and filters
+ */
+
+import { isLoggedIn } from "../js/tab.js";
+import { displayError } from "./error/error.mjs";
+
+let url = 'https://nf-api.onrender.com/api/v1/social/posts';
+const searchButton = document.querySelector("#searchButton");
+const htmlAll = document.querySelector("#all-posts");
+let storeData = [];
+
+/** 
+ * Update the value of url on the search
+ * @param {String} ev event
+ **/
+
+searchButton.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase()
+    /**
+     * Capture the change in input value and make a query to the API url
+     * @param {String} value Fetching query for the data in the backend
+     */
+    const filtered = storeData.filter((post) => {
+        return (
+            /** 
+             * @return post.title.toLowerCase().match(value) != null
+             * @return post.body.toLowerCase().match(value) != null
+             * Reference: https://stackoverflow.com/questions/61323656/how-to-search-by-title-defined-in-array
+            */
+            post.title.toLowerCase().includes(value) || 
+            post.body.toLowerCase().includes(value)
+        );
+    });
+    displayPosts(filtered);
+});
+
+const getPosts = async () => {
+    try {
+
+        const options = {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            }
+        }
+        const response = await fetch(url, options);
+        /**
+         * Fetch all posts
+         * storeData stores the data retrieved from the url of the api
+         * @return displayPosts(storeData) in the Fetch api this returns the post's data
+         * After it is stored it can be used as a global variable and refrenced later on
+         */
+        storeData = await response.json();
+        displayPosts(storeData);
+    } catch (error)
+    {   
+        console.log(error);
+        htmlAll.innerHTML = displayError('error', error);
+    }
+};
+
+/**
+ * displayPosts returns all the posts in the API as HTML
+ * And is also being used for the search function and filters.
+ */
+
+/** 
+ * displayPosts returns all the posts filtered
+ * by number of comments, reactions and the date the post was created, from old to new
+ * it also uses the search button in case a query was made
+ * @param {Object} data storeData
+*/
+
+const displayPosts = (data) => {
+    const htmlCard = data.map((post) => {
+        return `
+            &lt;div class="col mt-2">
+                &lt;div class="card">
+                    &lt;div class="card-header">
+                    ${post.title}
+                    &lt;/div>
+                    &lt;div class="card-body">
+                    ${post.body}
+                    &lt;br>
+                    &lt;img src="${post.media}" id="post-image" alt=" ">
+                    &lt;br>
+                    &lt;hr>
+                    &lt;b>Tags:&lt;/b> ${post.tags}
+                    &lt;br>
+                    &lt;b>Reactions:&lt;/b> ${post._count.reactions}
+                    &lt;b>Comments:&lt;/b> ${post._count.comments}
+                    &lt;/div>
+                    &lt;div class="card-footer">           
+                    &lt;a href="post/?id=${post.id}" class="btn btn-primary">View Post&lt;/a>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            `;
+        }).join('');
+        htmlAll.innerHTML = htmlCard;
+};
+
+/**
+ * Filters for comments, reactions and date creation
+ */
+
+const filterByComments = () => {
+    /**
+     * Comments are filterd by the count value from the API, form high to low
+     * @return displayPosts(filter) the filtered data is displayed on the frontend
+     */
+    const filter = storeData.sort((a, b) => {
+        return a._count.comments &lt; b._count.comments;
+    });
+    displayPosts(filter);
+}
+
+const filterByReactions = () => {
+    /**
+     * Reactions are filterd by the count value from the API, from high to low
+     * @return displayPosts(filter) the filtered data is displayed on the frontend
+     */
+    const filter = storeData.sort((a, b) => {
+        return a._count.reactions &lt; b._count.reactions;
+    });
+    displayPosts(filter);
+}
+
+const filterByDate = () => {
+    /**
+     * Posts are filtered by the date it was created from old to new
+     * @return displayPosts(filter) the filtered data is displayed on the frontend
+     */
+    const filter = storeData.sort((a, b) => {
+        return new Date(a.created) - new Date(b.created);
+    });
+    displayPosts(filter);
+}
+
+const clearFilter = (event) => {
+    /**
+     * clearFilter resets the filters, once they are selected or query began
+     */
+    event.preventDefault();
+    filterCommentsHtml.checked = false;
+    filterDateHtml.checked = false;
+    filterReactHtml.checked = false;
+    getPosts();
+}
+
+const filterCommentsHtml = document.querySelector("#filter-comments");
+const filterReactHtml = document.querySelector("#filter-reactions");
+const filterDateHtml = document.querySelector("#filter-date");
+const filterClearButton = document.querySelector("#clear-button");
+
+if (filterCommentsHtml.checked) {
+    filterByComments();
+} else if (filterReactHtml.checked) {
+    filterByReactions();
+} else if (filterDateHtml.checked) {
+    filterByDate();
+}
+
+filterCommentsHtml.addEventListener("click", filterByComments);
+filterDateHtml.addEventListener("click", filterByDate);
+filterReactHtml.addEventListener("click", filterByReactions);
+filterClearButton.addEventListener("click", clearFilter);
+
+if (isLoggedIn() === true) {
+    getPosts();
+}</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#autoLogin">autoLogin</a></li>
+        <li><a href="global.html#createPost">createPost</a></li>
+        <li><a href="global.html#displayPosts">displayPosts</a></li>
+        <li><a href="global.html#filterByComments">filterByComments</a></li>
+        <li><a href="global.html#htmlViewFeed">htmlViewFeed</a></li>
+        <li><a href="global.html#isLoggedIn">isLoggedIn</a></li>
+        <li><a href="global.html#viewPost">viewPost</a></li>
+      </ul>
+      <h3>Search.JS</h3>
+      <ul>
+        <li><a href="search.js.html">Search.js Documentation</a></li>
+      </ul>
+      <h3>Login.JS</h3>
+      <ul>
+        <li><a href="Authenticate_login.js.html">Login.js Documentation</a></li>
+      </ul>
+      <h3>Register.JS</h3>
+      <ul>
+        <li>
+          <a href="Authenticate_register.js.html">Register.js Documentation</a>
+        </li>
+      </ul>
+      <h3>createPost.JS</h3>
+      <ul>
+        <li><a href="createPost.js.html">createPost.js Documentation</a></li>
+      </ul>
+      <h3>Tab.JS</h3>
+      <ul>
+        <li><a href="tab.js.html">Tab.js Documentation</a></li>
+      </ul>
+      <h3>viewPost.JS</h3>
+      <ul>
+        <li><a href="viewPost.js.html">viewPost.js Documentation</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Oct 14
+      2022 13:17:27 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

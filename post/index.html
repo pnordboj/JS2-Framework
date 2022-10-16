@@ -1,60 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Social Media platform for everyone at Noroff!">
-    <link rel="icon" type="image/x-icon" href="../src/assets/favicon.ico">
-    <link rel="stylesheet" href="dist/css/styles.css">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Social Media platform for everyone at Noroff!"
+    />
+    <link rel="icon" type="image/x-icon" href="../src/assets/favicon.ico" />
+    <link rel="stylesheet" href="../dist/css/styles.css" />
+
     <title>Social Media Platform Post</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row">
-            <a href="../" class="navbar-brand shadow rounded p-2 mb-sm-2">Social Media Platform</a>
-            <div id="loggedInUser" class="d-flex justify-content-end">
-                <button id="loginUser" class="btn btn-primary border-dark shadow rounded">
-                    Login!
-                </button>
-                  
+      <nav
+        class="navbar navbar-dark bg-primary d-flex justify-content-evenly flex-row"
+      >
+        <div class="d-flex">
+          <button
+            type="button"
+            id="logout"
+            class="d-none shadow me-4 btn btn-secondary"
+            onclick="logout()"
+          >
+            Logout
+          </button>
+          <div id="loggedInUser" class="d-flex justify-content-end">
+            <div class="shadow p-2 bg-body rounded" style="width: rem10">
+              Not Logged inn, please login!
             </div>
-        </nav>
+          </div>
+        </div>
+        <a href="/" class="navbar-brand shadow rounded p-2 mb-sm-2"
+          >Social Media Platform</a
+        >
+        <div class="d-flex">
+          <a class="btn btn-light" href="../out/index.html">Documentation</a>
+        </div>
+      </nav>
     </header>
 
     <main>
-        <div>
-            <div class="container" id="view-post" style="width: 50%;">
-                <div class="card mt-3">
-                    <div class="card-header" id="post-title">
-                    </div>
-                    <div class="card-body" id="post-body">
-                    </div>
-                    <div class="card-footer" id="post-footer">
-                    </div>
-                    <div class="card-body" id="post-comments">
-                        <h3>User Comments</h3>
-                    </div>
-                    <div class="card-footer">
-                        <form id="reply-form" class="container">
-                            <a type="submit" class="btn btn-primary m-3" id="reply-button">Reply to Post NB! WIP</a>
-                            <a type="submit" class="btn btn-primary m-3" id="update-button">Update Post</a>
-                            <a type="submit" class="btn btn-primary m-3" id="delete-button">Delete Post</a>
-                            <input type="text" class="form-control" name="title" id="reply-title"
-                            placeholder="Update post title.. (NB! THIS IS ONLY FOR UPDATE, NOT REPLY!)">
-                            <textarea class="form-control mt-3" name="body" id="form-control-text reply-text" rows="3"></textarea>
-                        </form>
-                    </div>
-                </div>
+      <a href="../index.html"><button class="btn btn-primary m-4">Return to Homepage</button></a>
+      <div>
+        <div class="container" id="view-post" style="width: 50%">
+          <div class="card mt-3">
+            <div class="card-header" id="post-title"></div>
+            <div class="card-body" id="post-body"></div>
+            <div class="card-footer" id="post-footer"></div>
+            <div class="card-body" id="post-comments">
+              <h5>User Comments</h5>
             </div>
+            <div class="card-footer">
+              <div id="reply-form" class="container">
+                <button
+                  type="button"
+                  class="btn btn-primary me-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#replyModal"
+                >
+                  Reply to Post
+                </button>
+                <div
+                  class="modal fade"
+                  id="replyModal"
+                  tabindex="-1"
+                  aria-labelledby="replyModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title fs-5">Update Post</h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Reply to post</p>
+                        <form id="comment-form">
+                          <textarea
+                            class="form-control mt-3"
+                            name="body"
+                            id="form-control-text reply-text"
+                            rows="3"
+                            placeholder="Comment on post..."
+                          ></textarea>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <a
+                          type="submit"
+                          class="btn btn-primary m-3"
+                          id="reply-button"
+                          >Reply to Post</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn-primary me-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#updateModal"
+                >
+                  Update Post
+                </button>
+                <div
+                  class="modal fade"
+                  id="updateModal"
+                  tabindex="-1"
+                  aria-labelledby="updateModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title fs-5">Update Post</h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Update your post</p>
+                        <form id="update-form">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="title"
+                            id="reply-title"
+                            placeholder="Title..."
+                          />
+                          <textarea
+                            class="form-control mt-3"
+                            name="body"
+                            id="form-control-text reply-text"
+                            rows="3"
+                            placeholder="Updated post content..."
+                          ></textarea>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <a
+                          type="submit"
+                          class="btn btn-primary m-3"
+                          id="update-button"
+                          >Update Post</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal"
+                >
+                  Delete Post
+                </button>
+                <div
+                  class="modal fade"
+                  id="deleteModal"
+                  tabindex="-1"
+                  aria-labelledby="deleteModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title fs-5">Delete Post</h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete this post?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <a
+                          type="button"
+                          class="btn btn-primary"
+                          id="delete-button"
+                          >Delete Post</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
 
-    <footer>
-
-    </footer>
-    <script type="module" src="../src/post.mjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+    <footer></footer>
+    <script type="module" src="../src/post.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
